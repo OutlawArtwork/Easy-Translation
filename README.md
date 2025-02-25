@@ -397,6 +397,7 @@ export default MyComponent;
 
 ## Versioning
 
+- 1.0.2 [STABLE]
 - 1.0.1
 - 1.0.0
 
