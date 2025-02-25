@@ -77,23 +77,21 @@ function LanguageProvider(_a) {
                         url = url ? url : "/locale";
                         _b.label = 1;
                     case 1:
-                        _b.trys.push([1, 5, , 6]);
+                        _b.trys.push([1, 4, , 5]);
                         return [4 /*yield*/, fetch("".concat(url, "/").concat(getLanguage(supported), ".json"))];
                     case 2:
                         file = _b.sent();
                         if (!file.ok)
                             throw new Error("File not found: ".concat(file.status));
-                        if (!file.ok) return [3 /*break*/, 4];
                         _a = setLoaded;
                         return [4 /*yield*/, file.json()];
                     case 3:
                         _a.apply(void 0, [_b.sent()]);
-                        _b.label = 4;
-                    case 4: return [3 /*break*/, 6];
-                    case 5:
+                        return [3 /*break*/, 5];
+                    case 4:
                         error_1 = _b.sent();
                         throw new Error("-Easy Translation-: ".concat(error_1.message));
-                    case 6: return [2 /*return*/];
+                    case 5: return [2 /*return*/];
                 }
             });
         }); };
@@ -123,18 +121,22 @@ function LanguageProvider(_a) {
  */
 var translateText = function (defaultCategory, language, text, category, tokens) {
     category = getCategory(category, defaultCategory);
-    var value = text
-        .toLowerCase()
-        .replace(/@([\w]+)@/g, function (_, token) { return language[category][token]; });
-    if (!value || value === undefined || value === "undefined") {
-        return text;
+    try {
+        var value = text
+            .toLowerCase()
+            .replace(/@([\w]+)@/g, function (_, token) { return language[category][token]; });
+        if (!value || value === undefined || value === "undefined") {
+            return text;
+        }
+        if (tokens) {
+            value = checkTokens(value, tokens);
+        }
+        if (value.includes("|"))
+            return value.split("|");
+        return value;
     }
-    if (tokens) {
-        value = checkTokens(value, tokens);
-    }
-    if (value.includes("|"))
-        return value.split("|");
-    return value;
+    catch (error) { }
+    return text;
 };
 /**
  * Get the category

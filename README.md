@@ -8,16 +8,16 @@ This project was built using React (version 19.0.0).
 
 ## Table of contents
 
-- [Project Name](#project-name)
+- [Easy Peasy Translation](#project-name)
   - [Table of contents](#table-of-contents)
   - [Installation](#installation)
   - [Usage](#usage)
     - [LanguageProvider Context](#LanguageProvider)
-    - [Language Files](#LanguageFiles)
+    - [Language Files](#language-files)
     - [useTranslation Hook](#useTranslation)
-    - [translate function](#Translate)
-    - [group function](#TranslateGroup)
-    - [Translation Component](#Translation)
+    - [translate function](#translate)
+    - [group function](#translate-group)
+    - [Translation Component](#translation)
   - [Versioning](#versioning)
   - [Authors](#authors)
 
@@ -26,12 +26,12 @@ This project was built using React (version 19.0.0).
 To install the library, run:
 
 ```sh
-$ npm i easy-translation
+$ npm i easy-peasy-translation
 ```
 
 ## Usage
 
-### LanguageProvider
+## LanguageProvider
 
 The LanuageProvider must be added to the top level of your application as it sets up the required Context.
 
@@ -39,9 +39,9 @@ Props:
 
 `url` (Optional)
 
-| Type   | Description                                                                                         |
-| ------ | --------------------------------------------------------------------------------------------------- |
-| string | The url to language files directory. If not included will look at in your server "locale" directory |
+| Type   | Description                                                                                             |
+| ------ | ------------------------------------------------------------------------------------------------------- |
+| string | The url to language files directory. If not included will look in your server public "locale" directory |
 
 `supported` (Required)
 
@@ -51,10 +51,10 @@ Props:
 
 Example:
 
-## For ReactJS. The provider can be added directly to the top level.
+### For ReactJS. The provider can be added directly to the top level.
 
 ```tsx
-import { LanguageProvider } from "easy-translation";
+import { LanguageProvider } from "easy-peasy-translation";
 function main() {
   return (
     <LanguageProvider
@@ -68,7 +68,7 @@ function main() {
 export default main;
 ```
 
-## For NextJS. The provider needs to be added from inside a client component.
+### For NextJS. The provider needs to be added from inside a client component.
 
 ```tsx
 function main() {
@@ -84,7 +84,7 @@ export default main;
 ```tsx
 "use client";
 import React from "react";
-import { LanguageProvider } from "easy-translation";
+import { LanguageProvider } from "easy-peasy-translation";
 
 function Lang({ children }: { children: React.ReactNode }) {
   return (
@@ -99,7 +99,7 @@ function Lang({ children }: { children: React.ReactNode }) {
 export default Lang;
 ```
 
-### LanguageFiles
+## Language Files
 
 Language files are JSON files that are seperated into sections.
 Language files must be localed in at publicly accessable url. `http://someurl.com/locale`
@@ -117,7 +117,7 @@ Files:
 
 Usage:
 
-## Basic
+### Basic
 
 ```json
 {
@@ -127,7 +127,7 @@ Usage:
 }
 ```
 
-## Multiple (Pipe split)
+### Multiple (Pipe split)
 
 ```json
 {
@@ -137,7 +137,7 @@ Usage:
 }
 ```
 
-## Tokenized
+### Tokenized
 
 ```json
 {
@@ -169,7 +169,7 @@ Example:
 }
 ```
 
-### useTranslation
+## useTranslation
 
 This is the most common way to use the translation library.
 
@@ -187,7 +187,7 @@ Options:
 | ------ | ------------- | ------------------------------------------------------- |
 | string | undefined     | All translations will use a passed "section" as default |
 
-### Translate
+## Translate
 
 Usage:
 
@@ -217,20 +217,20 @@ if "-" is passed in the section field. Looks in the current section.
 | -------------- | -------------------- | ---------------------------------------------------------------------------- |
 | Array[strings] | ["token1", "token2"] | Token strings. Language matches tokens on an index. See language file above. |
 
-## Basic
+### Basic
 
 ```ts
 translate("@title@");
 ```
 
-## Multiple (Pipe split)
+### Multiple (Pipe split)
 
 ```ts
 translate("@multiple@")[0];
 translate("@multiple@")[1];
 ```
 
-## Tokenized
+### Tokenized
 
 ```ts
 translate("@tokens@", "section1", ["token1", "token2"]);
@@ -239,7 +239,7 @@ translate("@tokens@", "section1", ["token1", "token2"]);
 Example:
 
 ```tsx
-import { useTranslation } from "easy-translation";
+import { useTranslation } from "easy-peasy-translation";
 
 function MyComponent() {
   const { translate: t } = useTranslation("section1"); // Switch default to Section1
@@ -257,7 +257,7 @@ function MyComponent() {
 export default MyComponent;
 ```
 
-### TranslateGroup
+## Translate Group
 
 This function can be used to translate an Array of Translation Objects
 
@@ -275,10 +275,10 @@ Options:
 | --------- | ----------------- | ------------------------------------ |
 | Array[{}] | [{text:"@text@"}] | Pass an array of Translation Objects |
 
-## Basic
+### Basic
 
 ```tsx
-import { useTranslation } from "easy-translation";
+import { useTranslation } from "easy-peasy-translation";
 
 function MyComponent() {
   const { group: t } = useTranslation();
@@ -294,10 +294,10 @@ function MyComponent() {
 export default MyComponent;
 ```
 
-## Multiple (Pipe split)
+### Multiple (Pipe split)
 
 ```tsx
-import { useTranslation } from "easy-translation";
+import { useTranslation } from "easy-peasy-translation";
 
 function MyComponent() {
   const { group: t } = useTranslation();
@@ -313,10 +313,10 @@ function MyComponent() {
 export default MyComponent;
 ```
 
-## Tokenized
+### Tokenized
 
 ```tsx
-import { useTranslation } from "easy-translation";
+import { useTranslation } from "easy-peasy-translation";
 
 function MyComponent() {
   const { group: t } = useTranslation("section1");
@@ -336,7 +336,7 @@ export default MyComponent;
 Example:
 
 ```tsx
-import { useTranslation } from "easy-translation";
+import { useTranslation } from "easy-peasy-translation";
 
 function MyComponent() {
   const { group: t } = useTranslation("Section2");
@@ -358,9 +358,9 @@ function MyComponent() {
 export default MyComponent;
 ```
 
-### Translation
+## Translation
 
-The Translation Component can also be used. This component translates @text@ tokens by passing JSX
+The Translation Component can also be used. This component translates @text@ tokens by passing JSX.
 
 Options:
 
@@ -380,7 +380,7 @@ Example:
 
 ```tsx
 "use client";
-import { Translation } from "easy-translation";
+import { Translation } from "easy-peasy-translation";
 
 function MyComponent() {
   return (
@@ -397,7 +397,8 @@ export default MyComponent;
 
 ## Versioning
 
-- 1.2.0
+- 1.0.1
+- 1.0.0
 
 ## Authors
 
