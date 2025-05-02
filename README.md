@@ -37,11 +37,17 @@ The LanuageProvider must be added to the top level of your application as it set
 
 Props:
 
-`url` (Optional)
+`url` (Optional) - Used for remote files
 
 | Type   | Description                                                                                             |
 | ------ | ------------------------------------------------------------------------------------------------------- |
 | string | The url to language files directory. If not included will look in your server public "locale" directory |
+
+`files` (Optional) - Used for local files
+
+| Type                | Description                                                                |
+| ------------------- | -------------------------------------------------------------------------- |
+| Array(LanguageFile) | A list of Language File objects ({name: "en", file: en}) see example below |
 
 `supported` (Required)
 
@@ -53,12 +59,37 @@ Example:
 
 ### For ReactJS. The provider can be added directly to the top level.
 
+## Remote URL
+
 ```tsx
 import { LanguageProvider } from "easy-peasy-translation";
 function main() {
   return (
     <LanguageProvider
       url="<http path to language directory>"
+      supported={["en", "fr"]}
+    >
+      <div>...</div>
+    </LanguageProvider>
+  );
+}
+export default main;
+```
+
+## Local Files
+
+```tsx
+import { LanguageProvider } from "easy-peasy-translation";
+
+import en from "./features/Languages/en.json";
+import fr from "./features/Languages/fr.json";
+function main() {
+  return (
+    <LanguageProvider
+      files={[
+        { name: "en", file: en },
+        { name: "fr", file: fr },
+      ]}
       supported={["en", "fr"]}
     >
       <div>...</div>
@@ -397,7 +428,8 @@ export default MyComponent;
 
 ## Versioning
 
-- 1.0.2 [STABLE]
+- 1.0.4
+- 1.0.2
 - 1.0.1
 - 1.0.0
 

@@ -1,6 +1,6 @@
 {
   "name": "easy-peasy-translation",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Easy React Translations Library. Simple setup. Translate text on screen using JSON translation files.",
   "keywords": [
     "translations",

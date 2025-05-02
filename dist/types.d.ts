@@ -10,9 +10,14 @@ interface ILanguage {
     children: React.ReactNode;
     supported: string[];
     url?: string;
+    files?: LanguageFile[];
 }
+type LanguageFile = {
+    name: string;
+    file: any;
+};
 
-declare function LanguageProvider({ url, supported, children }: ILanguage): react_jsx_runtime.JSX.Element;
+declare function LanguageProvider({ url, files, supported, children }: ILanguage): react_jsx_runtime.JSX.Element;
 
 declare function Translation$1({ from, children, category, }: {
     from?: any;
